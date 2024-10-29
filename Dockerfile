@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     openjdk-11-jdk \
     software-properties-common \
     netcat-traditional \
+    build-essential \
     && apt-get clean
 
 RUN echo "deb https://repo.scala-sbt.org/scalasbt/debian all main" | tee /etc/apt/sources.list.d/sbt.list && \
