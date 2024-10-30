@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update
+
 RUN apt-get update && apt-get install -y \
     curl \
     gnupg \
@@ -26,21 +26,31 @@ RUN apt-get update && apt-get install -y sbt=1.5.5 nodejs python3.9 python3.9-ve
 RUN npm install -g yarn@1.22.22
 
 RUN git clone https://github.com/Texera/Udon
+
 RUN cd Udon/core/new-gui && yarn install
+
 RUN apt-get install -y \
     python3.9 \
     python3-pip \
     python3.9-dev \
     libpython3.9-dev
+    
 RUN cd Udon/core/new-gui && python3.9 -m venv /venv
+
 ENV PATH="/venv/bin:$PATH"
+
 RUN sed -i "s|path = \"\"|path = \"$(which python3.9)\"|" /Udon/core/amber/src/main/resources/python_udf.conf
+
 RUN cd Udon && pip install --default-timeout=100 -r core/amber/requirements.txt
 
 RUN pip install nltk spacy==3.2.6
+
 RUN python3.9 -m spacy download en_core_web_sm
+
 RUN pip install Pillow
+
 RUN sed -i '1s/^/#!\/bin\/bash\n/' /Udon/core//scripts/deploy-daemon.sh
+
 RUN npm install -g @angular/cli
 
 WORKDIR /Udon/core/scripts
