@@ -6,21 +6,21 @@
 ## Start container
 `docker run --rm -d --name udon -p 8080:8080 udon:latest`
 
-## Copy sample files to container
+## Copy experiment datasets to container
 Coco dataset:
 
-`docker cp core/experiment-related/val2017 udon:/tmp`
+`docker cp core/experiment-related/datasets/val2017 udon:/tmp`
 
 TPC-H Lineitem dataset:
 
-`docker cp core/experiment-related/lineitem.tbl udon:/tmp`
+`docker cp core/experiment-related/datasets/lineitem.tbl udon:/tmp`
 
 Twitter dataset:
 
-`docker cp core/experiment-related/twitter-dataset-for-udon-experiment.csv udon:/tmp`
+`docker cp core/experiment-related/datasets/twitter-dataset-for-udon-experiment.csv udon:/tmp`
 
 ## Enter container and start Udon
-`docker exec udon bash -c"./deploy.sh"`
+`docker exec -it udon bash -c "./deploy-daemon.sh"`
 
 ## Open the web interface
 located at [localhost:8080](http://localhost:8080)
