@@ -3,6 +3,7 @@ FROM ubuntu:latest
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
+    nano \
     curl \
     gnupg \
     git \
@@ -43,7 +44,10 @@ RUN sed -i "s|path = \"\"|path = \"$(which python3.9)\"|" /Udon/core/amber/src/m
 
 RUN cd Udon && pip install --default-timeout=100 -r core/amber/requirements.txt
 
-RUN pip install nltk spacy==3.2.6
+RUN pip install nltk spacy==3.2.6 textblob
+RUN python3.9 -m nltk.downloader stopwords
+RUN python3.9 -m nltk.downloader punkt_tab
+RUN python3.9 -m nltk.downloader wordnet
 
 RUN python3.9 -m spacy download en_core_web_sm
 

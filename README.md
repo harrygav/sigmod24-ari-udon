@@ -24,3 +24,11 @@ Twitter dataset:
 
 ## Open the web interface
 located at [localhost:8080](http://localhost:8080)
+
+## Configurations
+
+For W2 edit the UDF:
+```python
+import en_core_web_sm
+nlp = en_core_web_sm.load()
+```
