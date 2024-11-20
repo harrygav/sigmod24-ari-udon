@@ -50,6 +50,7 @@ RUN python3.9 -m nltk.downloader punkt_tab
 RUN python3.9 -m nltk.downloader wordnet
 
 RUN python3.9 -m spacy download en_core_web_sm
+RUN python3.9 -m spacy download en_core_web_lg
 
 RUN pip install Pillow
 
@@ -57,7 +58,7 @@ RUN sed -i '1s/^/#!\/bin\/bash\n/' /Udon/core//scripts/deploy-daemon.sh
 
 RUN npm install -g @angular/cli
 
-WORKDIR /Udon/core/scripts
+WORKDIR /Udon/core/
 
 #ENTRYPOINT ["./deploy-daemon.sh"]
 CMD ["tail", "-f", "/dev/null"]
